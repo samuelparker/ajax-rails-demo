@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :all_tasks, only: [:index, :create]
+  before_action :all_tasks, only: [:index, :create, :destroy]
+  before_action :set_tasks, only: [:destroy]
   respond_to :html, :js
 
   def new
@@ -19,8 +20,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    Task.destroy(params[:id])
-    redirect_to '/'
+    @task.destroy
   end
 
   private
