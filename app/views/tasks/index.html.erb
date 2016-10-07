@@ -1,8 +1,19 @@
-<% @tasks.each do |task| %>
-  <ul>
-    <li><%= link_to task.description, task %></li>
-    <li><%= task.deadline %></li>
-  </ul>
-<% end %>
+<div>
+  <div>
+    <h2>Tasks</h2>
+  </div>
 
-<%= link_to 'New Task', new_task_path %>
+  <div>
+    <%= link_to new_task_path, remote: true do %>
+      <button class="btn btn-default">New</button>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <div id="tasks-form" style="display:none;"></div>
+</div>
+
+<div>
+  <div id="tasks"><%= render @tasks %></div>
+</div>
