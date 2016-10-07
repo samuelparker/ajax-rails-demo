@@ -1,0 +1,9 @@
+<li>
+  <%= task.description %>
+
+  <span>
+    <%= link_to task, remote: true, method: :delete do %>
+      <button>Delete!</button>
+    <% end %>
+  </span>
+</li>
