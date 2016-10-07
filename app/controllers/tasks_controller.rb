@@ -1,45 +1,35 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  
-  def index
-    @tasks = Task.all
-  end
+  before_action :all_tasks, only: [:index, :create, :destroy]
+  before_action :set_tasks, only: [:destroy]
+  respond_to :html, :js
 
   def new
     @task = Task.new
   end
 
   def create
-    @task = Task.new(task_params)
-
-    if @task.save
-      flash[:notice] = 'Task created'
-      redirect_to @task
-    else
-      flash[:alert] = 'Task not created'
-      render :new
-    end
+    @task = Task.create(task_params)
   end
 
   def update
-    if @task.update_attributes(task_params)
-      flash[:notice] = 'Task updated'
-      redirect_to @task
-    else
-      flash[:alert] = 'Task not updated'
-      render :edit
-    end      
+    @task.update_attributes(task_params)
+  end
+
+  def show
+    @task = Task.find(params[:id])
   end
 
   def destroy
     @task.destroy
-    flash[:notice] = 'Task deleted'
-    redirect_to @task
   end
 
   private
 
-    def set_task
+    def all_tasks
+      @tasks = Task.all
+    end
+
+    def set_tasks
       @task = Task.find(params[:id])
     end
 

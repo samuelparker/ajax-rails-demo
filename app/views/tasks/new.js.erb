@@ -1,0 +1,5 @@
+$('#tasks-form').html("<%= j (render 'form') %>");
+// since render is a rails method, JS doesn't understand it
+// and it has to be interpreted with ERB
+// the 'j' is syntactic sugar for escape_javascript
+$('#tasks-form').slideDown(350);
